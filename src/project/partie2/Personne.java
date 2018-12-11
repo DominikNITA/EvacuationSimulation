@@ -9,7 +9,7 @@ import java.awt.*;
 public class Personne extends CerclePhysique {
     private static double rayonPers = 2;
     private static double massePers = 1;
-    private static Color colorPers = Color.black;
+    private Color colorPers = Color.black;
 
     private int id;
     private static int cpt = 0;
@@ -29,7 +29,7 @@ public class Personne extends CerclePhysique {
         return massePers;
     }
 
-    public static Color getColorPers() {
+    public Color getColorPers() {
         return colorPers;
     }
 

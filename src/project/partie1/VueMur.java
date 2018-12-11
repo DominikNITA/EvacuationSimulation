@@ -11,6 +11,7 @@ public class VueMur implements Drawable {
 
     public VueMur(RectanglePhysique m) {
         this.m = m;
+        this.color = Color.black;
     }
     public VueMur(RectanglePhysique m, Color color) {
         this.m = m;
