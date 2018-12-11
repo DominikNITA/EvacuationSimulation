@@ -7,9 +7,10 @@ import pobj.tools.Vecteur2D;
 import java.awt.*;
 
 public class Personne extends CerclePhysique {
-    private static double rayonPers = 2;
-    private static double massePers = 1;
-    private Color colorPers = Color.black;
+    private static final double RAYON = 4;
+    private static final double MASSE = 1;
+    private static final float INITIAL_SPEED = 1;
+    private static final Color COLOR = Color.black;
 
     private int id;
     private static int cpt = 0;
@@ -17,20 +18,25 @@ public class Personne extends CerclePhysique {
     private Strategy str;
 
 
-    public Personne(double x, double y) {
-        super(x, y, rayonPers,massePers);
+    public Personne(double x, double y, Strategy str) {
+        super(x, y, RAYON,MASSE);
+        this.str = str;
+        super.setVit(INITIAL_SPEED);
+
+        id = cpt;
+        cpt++;
     }
 
     public static double getRayonPers() {
-        return rayonPers;
+        return RAYON;
     }
 
     public static double getMassePers() {
-        return massePers;
+        return MASSE;
     }
 
-    public Color getColorPers() {
-        return colorPers;
+    public static Color getColorPers() {
+        return COLOR;
     }
 
     public int getId() {
@@ -42,9 +48,17 @@ public class Personne extends CerclePhysique {
     }
 
     public void move(){
-
+        if(str != null) {
+            target = str.deplacement(this); // usage de la strategie sur la personne qui invoque move
+        }
+        else{
+            target = new Vecteur2D(0,0);
+        }
+        setDir((target.minus(getPos())).normalize());
+        //TODO: add speed renewed
     }
-    public void setDir(Vecteur2D dir){
 
+    public void setDir(Vecteur2D dir){
+        super.setDir(dir);
     }
 }
