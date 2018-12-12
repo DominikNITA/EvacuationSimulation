@@ -61,4 +61,12 @@ public class Personne extends CerclePhysique {
         super.setDir(dir);
     }
     public void setVit(float vit) { super.setVit(vit);}
+
+    public boolean isSafe() {
+        return isSafe;
+    }
+
+    public void setSafe(boolean safe) {
+        isSafe = safe;
+    }
 }

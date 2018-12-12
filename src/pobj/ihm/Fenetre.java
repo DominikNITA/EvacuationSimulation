@@ -29,7 +29,7 @@ public class Fenetre extends JFrame{
         };
 //        panel.setPreferredSize(new Dimension(1024, 768));
         panel.setPreferredSize(new Dimension(450, 550));
-        panel.setBackground(Color.BLUE);
+        panel.setBackground(Color.WHITE);
         this.add(panel);
         this.setVisible(true);
         this.pack();

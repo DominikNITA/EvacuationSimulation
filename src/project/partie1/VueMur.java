@@ -21,7 +21,9 @@ public class VueMur implements Drawable {
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.drawRect((int)m.getPosX(),(int)m.getPosY(),(int)m.getHaut(),(int)m.getLarg());
+        //substract 1 from width and height to match layout
+        //https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#fillRect(int,%20int,%20int,%20int)
+        g.drawRect((int)m.getPosX(),(int)m.getPosY(),(int)m.getHaut()-1,(int)m.getLarg()-1);
     }
 
     @Override
