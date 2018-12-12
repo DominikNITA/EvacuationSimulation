@@ -31,7 +31,7 @@ public class BackgroundManager {
     public static Color getBackgroundColor(Terrain t){
         Color color;
         switch (t){
-            case Mur: color = Color.black;
+            case Mur: color = CASE_VIDE;
                 break;
             case Vide: color = CASE_VIDE;
                 break;

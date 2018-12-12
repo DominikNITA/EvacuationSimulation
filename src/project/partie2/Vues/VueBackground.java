@@ -6,18 +6,21 @@ import pobj.physics.RectanglePhysique;
 import java.awt.*;
 
 public class VueBackground implements Drawable {
-    private RectanglePhysique b;
+    private double x,y;
+    private int cote;
     private Color color;
 
-    public VueBackground(RectanglePhysique b, Color color) {
-        this.b = b;
+    public VueBackground(double x, double y, int cote, Color color) {
+        this.x = x;
+        this.y = y;
+        this.cote = cote;
         this.color = color;
     }
 
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        g.fillRect((int)b.getPosX(),(int)b.getPosY(),(int)b.getHaut(),(int)b.getLarg());
+        g.fillRect((int)x,(int)y,cote,cote);
     }
 
     @Override

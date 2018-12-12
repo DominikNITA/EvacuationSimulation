@@ -84,7 +84,7 @@ public class Salle {
         ArrayList<Drawable> res = new ArrayList<>();
         for (int i = 0; i < terr.length; i++) {
             for (int j = 0; j <terr[i].length ; j++) {
-                    res.add(new VueBackground(new RectanglePhysique(i*cote,j*cote,cote,cote), BackgroundManager.getBackgroundColor(terr[i][j])));
+                    res.add(new VueBackground(i*cote,j*cote, cote, BackgroundManager.getBackgroundColor(terr[i][j])));
             }
         }
         return res;

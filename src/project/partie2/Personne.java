@@ -16,15 +16,14 @@ public class Personne extends CerclePhysique {
     private static int cpt = 0;
     private Vecteur2D target;
     private Strategy str;
-
+    private boolean isSafe;
 
     public Personne(double x, double y, Strategy str) {
         super(x, y, RAYON,MASSE);
         this.str = str;
         super.setVit(INITIAL_SPEED);
-
-        id = cpt;
-        cpt++;
+        isSafe = false;
+        id = cpt++;
     }
 
     public static double getRayonPers() {
@@ -61,4 +60,5 @@ public class Personne extends CerclePhysique {
     public void setDir(Vecteur2D dir){
         super.setDir(dir);
     }
+    public void setVit(float vit) { super.setVit(vit);}
 }
