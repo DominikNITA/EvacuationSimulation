@@ -89,4 +89,8 @@ public class Salle {
         }
         return res;
     }
+
+    public int getCote() {
+        return cote;
+    }
 }
