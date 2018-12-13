@@ -15,7 +15,8 @@ public class PopulationTests {
     public static void main(String[] args) throws InterruptedException{
         Salle s = new Salle("ressources/terrain1.trk", 10);
         Population pop = new Population(s);
-        pop.addGroupePersonne(57, new StrategySimple(), 80, 130, 150, 225);
+        pop.addGroupePersonne(500, new StrategySimple());
+                //, 80, 130, 150, 225);
 
         Fenetre mgraph = new Fenetre();
         MoteurPhysique mphys = new MoteurPhysique();
@@ -34,12 +35,12 @@ public class PopulationTests {
             mgraph.add(new VuePersonne(p));
         }
 
-        for(int iter = 0; iter<200; iter++) {
+        for(int iter = 0; iter<800; iter++) {
             System.out.println("Tour " + iter);
             pop.move();
             // mouvements
             mphys.updateMovablePosition();
-            // affichage  // A DECOMMENTER UNE FOIS LES CLASSES D'AFFICHAGE REALISEES
+            // affichage
             mgraph.repaint();
             // temporisation (sinon, on ne voit rien)
             Thread.sleep(50);

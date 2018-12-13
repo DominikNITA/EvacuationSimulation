@@ -1,6 +1,7 @@
 package project.partie2;
 
 import pobj.physics.CerclePhysique;
+import pobj.physics.ObjectPhysique;
 import pobj.simuagent.Strategy;
 import pobj.tools.Vecteur2D;
 
@@ -55,6 +56,7 @@ public class Personne extends CerclePhysique {
             target = new Vecteur2D(0,0);
         }
         setDir((target.minus(getPos())).normalize());
+        super.setVit(inititalSpeed);
         //TODO: add speed renewed
     }
 
@@ -70,4 +72,5 @@ public class Personne extends CerclePhysique {
     public void setSafe(boolean safe) {
         isSafe = safe;
     }
+
 }
