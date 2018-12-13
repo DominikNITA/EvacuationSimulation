@@ -41,9 +41,11 @@ public class Salle {
     public ArrayList<Vecteur2D> getListeCibles() {
         return listeCibles;
     }
+
     public Terrain get(int i, int j){
         return terr[i][j];
     }
+
     public Terrain get(Vecteur2D vect){
         int i = (int)(vect.getX()/cote);
         int j = (int)(vect.getY()/cote);
@@ -84,7 +86,7 @@ public class Salle {
         ArrayList<Drawable> res = new ArrayList<>();
         for (int i = 0; i < terr.length; i++) {
             for (int j = 0; j <terr[i].length ; j++) {
-                    res.add(new VueBackground(i*cote,j*cote, cote, BackgroundManager.getBackgroundColor(terr[i][j])));
+                    res.add(new VueBackground(i*cote,j*cote, cote, BackgroundManager.getBackgroundColor(get(i,j))));
             }
         }
         return res;

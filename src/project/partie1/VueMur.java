@@ -10,8 +10,7 @@ public class VueMur implements Drawable {
     private Color color;
 
     public VueMur(RectanglePhysique m) {
-        this.m = m;
-        this.color = Color.black;
+        this(m, Color.BLACK);
     }
     public VueMur(RectanglePhysique m, Color color) {
         this.m = m;
@@ -21,7 +20,7 @@ public class VueMur implements Drawable {
     @Override
     public void draw(Graphics g) {
         g.setColor(color);
-        //substract 1 from width and height to match layout
+        //TODO: substract 1 from width and height to match layout
         //https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#fillRect(int,%20int,%20int,%20int)
         g.drawRect((int)m.getPosX(),(int)m.getPosY(),(int)m.getHaut()-1,(int)m.getLarg()-1);
     }

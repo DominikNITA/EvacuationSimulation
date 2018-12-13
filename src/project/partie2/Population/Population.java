@@ -1,8 +1,10 @@
-package project.partie2;
+package project.partie2.Population;
 
 import pobj.simuagent.Strategy;
 import pobj.simuagent.Terrain;
 import pobj.tools.Vecteur2D;
+import project.partie2.Personne;
+import project.partie2.Salle;
 
 import java.util.ArrayList;
 
@@ -10,24 +12,27 @@ public class Population {
     private ArrayList<Personne> personnes;
     private Salle s;
     private Vecteur2D lastSpot;
+    private Vecteur2D initialSpot;
     private double margin = 1;
     private boolean isNotFull;
+
     public Population(Salle s){
         personnes = new ArrayList<>();
         this.s = s;
-        lastSpot = new Vecteur2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
+        initialSpot = new Vecteur2D(-1,-1);
+        lastSpot = new Vecteur2D(-1,-1);
         isNotFull = true;
     }
 
     public void addGroupePersonne(int amount, Strategy str, double xLeft, double xRight, double yTop, double yBot){
-        if(lastSpot.equals(new Vecteur2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY)))
+        if(lastSpot.getX() == initialSpot.getX() && lastSpot.getY() == initialSpot.getY())
             lastSpot = new Vecteur2D(xLeft,yTop);
         int personneAdded = -1; //Initilized at -1 for logics reasons...
-        for (int i = 0; i < amount || isNotFull; i++) {
+        for (int i = 0; i < amount && isNotFull; i++) {
             addPersonne(str, xLeft, xRight, yTop, yBot);
             personneAdded++;
         }
-        System.out.println(personneAdded + " Personne added to population");
+        System.out.println(personneAdded + " Personne " +  str.getClass().toString() + " added to population");
     }
     public void addGroupePersonne(int amount, Strategy str){
         addGroupePersonne(amount, str,0,s.getLarg()*s.getCote(),0,s.getHaut()*s.getCote());
@@ -43,11 +48,11 @@ public class Population {
                 Personne p = new Personne(pos.getX(),pos.getY(),str);
                 personnes.add(p);
 
-                System.out.println("Personne added to population");
+                System.out.println("Personne " + str.getClass().toString() + " added to population");
                 lastSpot = pos;
             } else {
                 isNotFull = false;
-                System.out.println("Cannot add more Personne into specified Salle!");
+                System.out.println("Cannot add more Personne into specified Salle! No more space.");
             }
         }
     }
@@ -84,27 +89,37 @@ public class Population {
 
     private boolean CheckCorrectPos(double x, double y){
         // x,y = coordinates of top left corner of "circle's square"
-        Vecteur2D topLimitCircle = new Vecteur2D(x + Personne.getRayonPers(),y);
-        Vecteur2D rightLimitCircle = new Vecteur2D(x + 2*Personne.getRayonPers(), y + Personne.getRayonPers());
-        Vecteur2D leftLimitCircle = new Vecteur2D(x, y + Personne.getRayonPers());
-        Vecteur2D bottomLimitCircle = new Vecteur2D(x + 2*Personne.getRayonPers(), y + Personne.getRayonPers()*2);
+        Vecteur2D topLimitCircle = new Vecteur2D(x /*+ Personne.getRayonPers()*/,y);
+        //Vecteur2D rightLimitCircle = new Vecteur2D(x + 2*Personne.getRayonPers(), y + Personne.getRayonPers());
+        //Vecteur2D leftLimitCircle = new Vecteur2D(x, y + Personne.getRayonPers());
+        //Vecteur2D bottomLimitCircle = new Vecteur2D(x + 2*Personne.getRayonPers(), y + Personne.getRayonPers()*2);
 
         //TODO: to simplify
         if(s.get(topLimitCircle) == Terrain.Mur
-                || s.get(rightLimitCircle) == Terrain.Mur
+               /* || s.get(rightLimitCircle) == Terrain.Mur
                 || s.get(leftLimitCircle) == Terrain.Mur
-                || s.get(bottomLimitCircle) == Terrain.Mur){
+                || s.get(bottomLimitCircle) == Terrain.Mur*/){
             return false;
         }
         return true;
     }
 
+    public void move(){
+        for (Personne p : personnes){
+            p.move();
+        }
+    }
+
     public boolean isSafe(){
         for (Personne p: personnes) {
-            if(!p.isSafe()){
+            if(!p.getIsSafe()){
                 return false;
             }
         }
         return true;
+    }
+
+    public ArrayList<Personne> getPersonnes() {
+        return personnes;
     }
 }

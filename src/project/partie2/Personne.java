@@ -9,19 +9,20 @@ import java.awt.*;
 public class Personne extends CerclePhysique {
     private static final double RAYON = 4;
     private static final double MASSE = 1;
-    private static final float INITIAL_SPEED = 1;
-    private static final Color COLOR = Color.black;
+    private static float inititalSpeed = 1;
+    private static Color color = Color.black;
 
     private int id;
     private static int cpt = 0;
     private Vecteur2D target;
     private Strategy str;
+    // Quand isSafe==false: personne se dirige vers zone safe, quand vrai, personne continue tout droit
     private boolean isSafe;
 
     public Personne(double x, double y, Strategy str) {
         super(x, y, RAYON,MASSE);
         this.str = str;
-        super.setVit(INITIAL_SPEED);
+        super.setVit(inititalSpeed);
         isSafe = false;
         id = cpt++;
     }
@@ -35,7 +36,7 @@ public class Personne extends CerclePhysique {
     }
 
     public static Color getColorPers() {
-        return COLOR;
+        return color;
     }
 
     public int getId() {
@@ -62,7 +63,7 @@ public class Personne extends CerclePhysique {
     }
     public void setVit(float vit) { super.setVit(vit);}
 
-    public boolean isSafe() {
+    public boolean getIsSafe() {
         return isSafe;
     }
 
