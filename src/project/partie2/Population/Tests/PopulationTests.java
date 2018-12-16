@@ -11,11 +11,14 @@ import project.partie2.Salle;
 import project.partie2.Strategies.StrategySimple;
 import project.partie2.Vues.VuePersonne;
 
+import java.util.Timer;
+
 public class PopulationTests {
     public static void main(String[] args) throws InterruptedException{
         Salle s = new Salle("ressources/terrain1.trk", 10);
         Population pop = new Population(s);
-        pop.addGroupePersonne(500, new StrategySimple());
+        pop.addGroupePersonne(30, new StrategySimple());
+        pop.addGroupePersonne(1000, new StrategySimple());
                 //, 80, 130, 150, 225);
 
         Fenetre mgraph = new Fenetre();
@@ -34,7 +37,6 @@ public class PopulationTests {
             mphys.add(p);
             mgraph.add(new VuePersonne(p));
         }
-
         for(int iter = 0; iter<800; iter++) {
             System.out.println("Tour " + iter);
             pop.move();

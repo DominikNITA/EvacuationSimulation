@@ -16,11 +16,16 @@ public class Salle {
     private Terrain[][] terr;
     private int cote;
 
+    private ArrayList<Mur> murs;
+    private ArrayList<Drawable> backgroundVues;
+
     public Salle(Terrain[][] terr, int cote) {
         this.terr = terr;
         this.cote = cote;
         listeCibles = new ArrayList<>();
         findCibles();
+        murs = findMurs();
+        backgroundVues = createBackgroundVues();
     }
 
     public Salle(String filename, int cote){
@@ -70,7 +75,7 @@ public class Salle {
         return false;
     }
 
-    public ArrayList<Mur> getMurs(){
+    public ArrayList<Mur> findMurs(){
         ArrayList<Mur> res = new ArrayList<>();
         for (int i = 0; i < terr.length; i++) {
             for (int j = 0; j <terr[i].length ; j++) {
@@ -82,7 +87,7 @@ public class Salle {
         return res;
     }
 
-    public ArrayList<Drawable> getBackgroundVues(){
+    public ArrayList<Drawable> createBackgroundVues(){
         ArrayList<Drawable> res = new ArrayList<>();
         for (int i = 0; i < terr.length; i++) {
             for (int j = 0; j <terr[i].length ; j++) {
@@ -91,6 +96,9 @@ public class Salle {
         }
         return res;
     }
+
+    public ArrayList<Mur> getMurs(){ return murs;}
+    public ArrayList<Drawable> getBackgroundVues(){ return backgroundVues;}
 
     public int getCote() {
         return cote;

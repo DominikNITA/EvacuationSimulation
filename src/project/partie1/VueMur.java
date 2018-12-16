@@ -27,6 +27,6 @@ public class VueMur implements Drawable {
 
     @Override
     public int getPriority() {
-        return 0;
+        return 1;
     }
 }

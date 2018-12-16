@@ -30,10 +30,10 @@ public class Population {
     public void addGroupePersonne(int amount, Strategy str, double xLeft, double xRight, double yTop, double yBot){
         if(lastSpot.getX() == initialSpot.getX() && lastSpot.getY() == initialSpot.getY()) // equals() not working properly
             lastSpot = new Vecteur2D(xLeft,yTop);
-        int personneAdded = -1; //Initilized at -1 for logics reasons...
+        int personneAdded = 0; //Initilized at -1 for logics reasons...
         for (int i = 0; i < amount && isNotFull; i++) {
-            addPersonne(str, xLeft, xRight, yTop, yBot);
-            personneAdded++;
+            if(addPersonne(str, xLeft, xRight, yTop, yBot))
+                personneAdded++;
         }
         System.out.println(personneAdded + " Personne " +  str.getClass().toString() + " added to population");
     }
@@ -41,10 +41,10 @@ public class Population {
         addGroupePersonne(amount, str,0,s.getLarg()*s.getCote(),0,s.getHaut()*s.getCote());
     }
 
-    private void addPersonne(Strategy str){
-        addPersonne(str,0,s.getLarg()*s.getCote(),0,s.getHaut()*s.getCote());
+    private boolean addPersonne(Strategy str){
+        return addPersonne(str,0,s.getLarg()*s.getCote(),0,s.getHaut()*s.getCote());
     }
-    private void addPersonne(Strategy str,double xLeft, double xRight, double yTop, double yBot){
+    private boolean addPersonne(Strategy str,double xLeft, double xRight, double yTop, double yBot){
         if (isNotFull) {
             Vecteur2D pos = findNextSpot(xLeft, xRight, yTop,yBot);
             if (pos != null) {
@@ -53,10 +53,15 @@ public class Population {
 
                 System.out.println("Personne " + p.getPos().toString() +" added to population");
                 lastSpot = pos;
+                return true;
             } else {
                 isNotFull = false;
                 System.out.println("Cannot add more Personne into specified Salle! No more space.");
+                return false;
             }
+        }
+        else{
+            return false;
         }
     }
 

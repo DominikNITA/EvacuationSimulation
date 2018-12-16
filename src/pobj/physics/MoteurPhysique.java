@@ -159,6 +159,8 @@ public class MoteurPhysique {
 		return VITESSEMAXSIMULATION;
 	}
 
-
+	public ArrayList<ObjectPhysique> getTab() {
+		return tab;
+	}
 }
 
