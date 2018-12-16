@@ -16,14 +16,16 @@ public class Simulation {
     private Population population;
     private Fenetre mgraph;
     private MoteurPhysique mphys;
+    private Resultats resultats;
 
-    private static final int MAX_SIMULATION_ITERATIONS = 800;
+    private static final int MAX_SIMULATION_ITERATIONS = 101;
 
     public Simulation(Salle salle) {
         this.salle = salle;
         this.population = new Population(salle);
         this.mgraph = new Fenetre();
         this.mphys = new MoteurPhysique();
+        this.resultats = new Resultats(population.getPersonnes());
     }
 
     public Simulation(String filename, int cote){
@@ -44,13 +46,13 @@ public class Simulation {
         preparePersonnes();
     }
 
-    public void prepareBackground(){
+    private void prepareBackground(){
         for (Drawable vue : salle.getBackgroundVues()){
             mgraph.add(vue);
         }
     }
 
-    public void prepareMurs(){
+    private void prepareMurs(){
         for (Mur mur: salle.getMurs()){
             //ajout d'accesseur dans la class MoteurPhysique
             if(!mphys.getTab().contains(mur)) {
@@ -60,15 +62,17 @@ public class Simulation {
         }
     }
 
-    public void preparePersonnes(){
+    private void preparePersonnes(){
         for (Personne personne: population.getPersonnes()){
-            mphys.add(personne);
-            mgraph.add(new VuePersonne(personne));
+            if(!mphys.getTab().contains(personne)) {
+                mphys.add(personne);
+                mgraph.add(new VuePersonne(personne));
+            }
         }
     }
 
     public void startSimulation() throws InterruptedException{
-        for(int iter = 0; iter<800; iter++) {
+        for(int iter = 0; iter<MAX_SIMULATION_ITERATIONS; iter++) {
             System.out.println("Tour " + iter);
             population.move();
             // mouvements
@@ -80,13 +84,33 @@ public class Simulation {
 
             if(population.isSafe()){
                 System.out.println("Evacuation reussite en " + iter + " iterations");
-                break;
+                resultats.setIterations(iter);
+                return;
             }
 
             if(!mphys.isMove()) {
                 System.out.println("plus de mouvement => sortie");
-                break;
+                return;
             }
         }
+        System.out.println("Evacuation non reussi");
+        resultats.setIterations(Resultats.EVACUATION_NOT_FINISHED);
+    }
+
+    public void showResultats(){
+        //Clearing JFrame with:
+        //https://stackoverflow.com/questions/6260855/how-to-clear-reset-a-jframe
+        //https://stackoverflow.com/questions/9347076/how-to-remove-all-components-from-a-jframe-in-java
+//        mgraph.removeAll();
+//        mgraph.revalidate();
+//        mgraph.repaint();
+//        mgraph.add(resultats.getResultatsVue());
+//        mgraph.repaint();
+        Fenetre fenetreResultats = new Fenetre();
+        fenetreResultats.setLocation(mgraph.getX() + mgraph.getWidth(), mgraph.getY());
+        fenetreResultats.setSize(mgraph.getWidth(), mgraph.getHeight() / 3);
+
+        fenetreResultats.add(resultats.getResultatsVue());
+        fenetreResultats.repaint();
     }
 }
