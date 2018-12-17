@@ -10,7 +10,7 @@ public class Resultats {
     private int iterations;
     private ArrayList<Personne> personnes;
 
-    private final double MINUTES_PAR_ITERATION = 1.;
+    private final double MINUTES_PAR_ITERATION = 1/60.;
     public static final int EVACUATION_NOT_FINISHED = -1;
 
     public Resultats(ArrayList<Personne> personnes) {

@@ -37,7 +37,7 @@ public class Salle {
             for (int j = 0; j <terr[i].length ; j++) {
                 if(Terrain.isTarget(terr[i][j])){
                     // on ajoute cote/2 pour mettre le point au centre du Terrain
-                    listeCibles.add(new Vecteur2D(i*cote + cote/2.0, j*cote +cote/2.0));
+                    listeCibles.add(new Vecteur2D(i*cote + cote/2.0, j*cote + cote/2.0));
                 }
             }
         }
@@ -75,7 +75,7 @@ public class Salle {
         return false;
     }
 
-    public ArrayList<Mur> findMurs(){
+    private ArrayList<Mur> findMurs(){
         ArrayList<Mur> res = new ArrayList<>();
         for (int i = 0; i < terr.length; i++) {
             for (int j = 0; j <terr[i].length ; j++) {
@@ -87,7 +87,7 @@ public class Salle {
         return res;
     }
 
-    public ArrayList<Drawable> createBackgroundVues(){
+    private ArrayList<Drawable> createBackgroundVues(){
         ArrayList<Drawable> res = new ArrayList<>();
         for (int i = 0; i < terr.length; i++) {
             for (int j = 0; j <terr[i].length ; j++) {
@@ -102,5 +102,9 @@ public class Salle {
 
     public int getCote() {
         return cote;
+    }
+
+    public Terrain[][] getTerr() {
+        return terr;
     }
 }

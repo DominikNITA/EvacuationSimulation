@@ -18,7 +18,7 @@ public class Simulation {
     private MoteurPhysique mphys;
     private Resultats resultats;
 
-    private static final int MAX_SIMULATION_ITERATIONS = 101;
+    private static final int MAX_SIMULATION_ITERATIONS = 1500;
 
     public Simulation(Salle salle) {
         this.salle = salle;
@@ -98,19 +98,15 @@ public class Simulation {
     }
 
     public void showResultats(){
-        //Clearing JFrame with:
-        //https://stackoverflow.com/questions/6260855/how-to-clear-reset-a-jframe
-        //https://stackoverflow.com/questions/9347076/how-to-remove-all-components-from-a-jframe-in-java
-//        mgraph.removeAll();
-//        mgraph.revalidate();
-//        mgraph.repaint();
-//        mgraph.add(resultats.getResultatsVue());
-//        mgraph.repaint();
         Fenetre fenetreResultats = new Fenetre();
         fenetreResultats.setLocation(mgraph.getX() + mgraph.getWidth(), mgraph.getY());
         fenetreResultats.setSize(mgraph.getWidth(), mgraph.getHeight() / 3);
 
         fenetreResultats.add(resultats.getResultatsVue());
         fenetreResultats.repaint();
+    }
+
+    public Salle getSalle() {
+        return salle;
     }
 }

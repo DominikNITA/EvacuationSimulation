@@ -110,16 +110,16 @@ public class Population {
         return true;
     }
 
-    public boolean collisionDetected(Personne p1, Personne p2){
+    private boolean collisionDetected(Personne p1, Personne p2){
         return isColliding(p1.getPos(),p1.getRayon(),p2.getPos(),p2.getRayon());
     }
 
-    public boolean collisionDetected(Personne p1, Mur m1){
+    private boolean collisionDetected(Personne p1, Mur m1){
         //on suppose que hauteur == largeur du mur
         return isColliding(p1.getPos(),p1.getRayon(),m1.getPos(),m1.getHaut());
     }
 
-    public boolean isColliding(Vecteur2D pos1, double cote1, Vecteur2D pos2, double cote2){
+    private boolean isColliding(Vecteur2D pos1, double cote1, Vecteur2D pos2, double cote2){
         double maxCote = Double.max(cote1,cote2);
         double deltaX = Math.abs(pos1.getX()-pos2.getX());
         double deltaY = Math.abs(pos1.getY()-pos2.getY());

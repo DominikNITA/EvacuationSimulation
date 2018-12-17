@@ -139,6 +139,16 @@ public class Vecteur2D implements Cloneable {
     public Vecteur2D minus(Vecteur2D v) {
         return new Vecteur2D( this.x - v.x, this.y-v.y);
     }
-	
-	
+
+	@Override
+	public boolean equals(Object o){
+		if (o == this) {
+			return true;
+		}
+		if(!(o instanceof Vecteur2D)){
+			return  false;
+		}
+		Vecteur2D vect2 = (Vecteur2D) o;
+		return vect2.getX() == getX() && vect2.getY() == getY();
+	}
 }
